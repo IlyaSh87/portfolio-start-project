@@ -3,25 +3,38 @@ import styled from "styled-components";
 
 import {Link} from "../../../../components/Link";
 
+export type TabStatusType = "all"|"landing"|"react"|"spa"
 
-export const TabMenu = (props: { menuItems: Array<string> }) => {
+
+
+type TabMenuPropsType = {
+    tabsItems: Array<{status: TabStatusType,title: string}>
+    changeFilterStatus: (value: TabStatusType) => void
+    currentFilterStatus: string
+}
+
+export const TabMenu = (props: TabMenuPropsType) => {
+
+    console.log(props.currentFilterStatus)
     return (
-        <StyledHeaderMenu>
+        <StyledTabMenu>
             <ul>
                 {/*probezimsya mapom*/}
-                {props.menuItems.map((item: string, index: number) => (
-                        <ListItem key={index}>
-                            <Link href=" ">{item}</Link>
-                        </ListItem>
-                    )
-                )}
+                {props.tabsItems.map((item  ,index  ) => {
+                    console.log(props.currentFilterStatus === item.status)
+                    return <ListItem key={index}>
+                                <Link active={props.currentFilterStatus === item.status} as={"button"} onClick={() =>
+                                {props.changeFilterStatus(item.status)}}>{item.title}</Link>
+                    </ListItem>
+
+                })}
 
             </ul>
-        </StyledHeaderMenu>
+        </StyledTabMenu>
     );
 }
 
-const StyledHeaderMenu = styled.nav`
+const StyledTabMenu = styled.nav`
     
 
     ul {
@@ -29,7 +42,7 @@ const StyledHeaderMenu = styled.nav`
         justify-content: space-between;
         max-width: 352px;
         width: 100%;
-        border: 1px solid green;
+        border: 1px solid red;
         margin:0 auto 40px;
     }
 

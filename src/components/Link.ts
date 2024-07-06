@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {theme} from "../styles/Theme";
 
 
-export const Link = styled.a`
+export const Link = styled.a<{active?:boolean}>`
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
@@ -10,6 +10,14 @@ export const Link = styled.a`
     padding: 10px;
     position: relative;
     z-index: 0;
+    background-color: transparent;
+
+    &:hover {
+        &::before {
+            height: 10px;
+        }
+    }
+
 
     &::before {
         content: "";
@@ -21,16 +29,20 @@ export const Link = styled.a`
         left: 0;
         right: 0;
         z-index: 1;
-        
+        height: 0;
+        transition: ${theme.animations.transition};
+
     }
 
-    &:hover {
-        &::before {
-            height: 10px;
-        }
+    ${props => props.active && css<{ active?: boolean }>`
+            &::before {
+                height: 10px;
+            }
+        `}
+
     }
 
 
 
-
+   
 `
