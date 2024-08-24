@@ -9,10 +9,10 @@ import {MobileMenu} from "./headerMenue/mobileMenue/MobileMenue";
 import{S} from './Header_Styles'
 import {DesctopMenu} from "./headerMenue/desctopMenue/DesctopMenue";
 
-
+const breakpoint = 768;
 export const Header: React.FC = () => {
     const [width, setWidth] = React.useState(window.innerWidth);
-    const breakpoint = 768;
+
 
     React.useEffect(() => {
         const handleWindowResize = () => setWidth(window.innerWidth)
